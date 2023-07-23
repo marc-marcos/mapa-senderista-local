@@ -5,10 +5,23 @@ import sqlite3
 
 BASE_PATH = 'routes/'
 
-def overlayGPX(gpxData, map, status):
+def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
     gpx_file = open(gpxData, 'r')
     gpx = gpxpy.parse(gpx_file)
     points = []
+
+    customShortText = gpx.tracks[0].name
+    distance = gpx.length_3d()
+    totalElevation = gpx.get_uphill_downhill()
+    customText = "<b>Distance:</b> " + str(round(distance/1000, 2)) + " km" + "<br>" + "<b>Elevation:</b> " + str(round(totalElevation[0], 2)) + " m"
+
+    folium.Marker(
+        [gpx.tracks[0].segments[0].points[0].latitude, 
+        gpx.tracks[0].segments[0].points[0].longitude], 
+        popup=customText,
+        tooltip=customShortText).add_to(map)
+
+
     for track in gpx.tracks:
         for segment in track.segments:        
             for point in segment.points:
@@ -27,7 +40,7 @@ c.execute('SELECT * FROM routes')
 rows = c.fetchall()
 
 for row in rows:
-    overlayGPX(BASE_PATH + row[0], myMap, row[2])
+    overlayGPX(BASE_PATH + row[0], myMap, row[2], row[1])
 
 myMap.save('index.html')
 webbrowser.open('index.html')
