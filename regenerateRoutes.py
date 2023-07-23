@@ -8,7 +8,7 @@ DATABASE = 'database.db'
 conn = sqlite3.connect(DATABASE)
 cursor = conn.cursor()
 
-dir_path = 'backend/routes/'
+dir_path = 'routes/'
 
 for path in os.listdir(dir_path):
     if path.endswith('.gpx'):
