@@ -15,11 +15,6 @@ def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
     totalElevation = gpx.get_uphill_downhill()
     customText = "<b>Distance:</b> " + str(round(distance/1000, 2)) + " km" + "<br>" + "<b>Elevation:</b> " + str(round(totalElevation[0], 2)) + " m"
 
-    folium.Marker(
-        [gpx.tracks[0].segments[0].points[0].latitude, 
-        gpx.tracks[0].segments[0].points[0].longitude], 
-        popup=customText,
-        tooltip=customShortText).add_to(map)
 
 
     for track in gpx.tracks:
@@ -27,9 +22,22 @@ def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
             for point in segment.points:
                 points.append(tuple([point.latitude, point.longitude]))
 
-    if status == 0: folium.PolyLine(points, color="red", weight=2.5, opacity=1).add_to(map)
-    elif status == 1: folium.PolyLine(points, color="purple", weight=2.5, opacity=1).add_to(map)
-    elif status == 2: folium.PolyLine(points, color="green", weight=2.5, opacity=1).add_to(map)
+    if status == 0: 
+        folium.PolyLine(points, color="red", weight=2.5, opacity=1).add_to(map)
+        statusColor = "red"
+    elif status == 1: 
+        folium.PolyLine(points, color="purple", weight=2.5, opacity=1).add_to(map)
+        statusColor = "purple"
+    else: 
+        folium.PolyLine(points, color="green", weight=2.5, opacity=1).add_to(map)
+        statusColor = "green"
+
+    folium.Marker(
+        [gpx.tracks[0].segments[0].points[0].latitude, 
+        gpx.tracks[0].segments[0].points[0].longitude], 
+        popup=customText,
+        icon=folium.Icon(color=statusColor),
+        tooltip=customShortText).add_to(map)
 
 myMap = folium.Map(location=[10,10],zoom_start=3)
 
