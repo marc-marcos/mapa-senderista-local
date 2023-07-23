@@ -28,9 +28,12 @@ def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
     elif status == 1: 
         folium.PolyLine(points, color="purple", weight=2.5, opacity=1).add_to(map)
         statusColor = "purple"
-    else: 
+    elif status == 2: 
         folium.PolyLine(points, color="green", weight=2.5, opacity=1).add_to(map)
         statusColor = "green"
+    else: 
+        folium.PolyLine(points, color="blue", weight=2.5, opacity=1).add_to(map)
+        statusColor = "blue"
 
     folium.Marker(
         [gpx.tracks[0].segments[0].points[0].latitude, 
