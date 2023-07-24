@@ -51,6 +51,7 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 
 - 0.1 Version (next release)
     - [ ] More options to modify the database. 
+    - [ ] Link of the route in the popup.
 - Future versions
     - [ ] GUI to avoid having to deal with terminal usage.
     - [ ] Installation via GUI.
