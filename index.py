@@ -2,8 +2,9 @@ import folium
 import webbrowser
 import gpxpy
 import sqlite3
+import os
 
-BASE_PATH = 'routes/'
+from creatingDatabase import createDatabase 
 
 def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
     gpx_file = open(gpxData, 'r')
@@ -43,16 +44,28 @@ def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
         icon=folium.Icon(color=statusColor),
         tooltip=customShortText).add_to(map)
 
-myMap = folium.Map(location=[10,10],zoom_start=3)
+def startupMap():
+    BASE_PATH = 'routes/'
 
-conn = sqlite3.connect('database.db')
-c = conn.cursor()
+    myMap = folium.Map(location=[10,10],zoom_start=3)
 
-c.execute('SELECT * FROM routes')
-rows = c.fetchall()
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
 
-for row in rows:
-    overlayGPX(BASE_PATH + row[0], myMap, row[2], row[1])
+    c.execute('SELECT * FROM routes')
+    rows = c.fetchall()
 
-myMap.save('index.html')
-webbrowser.open('index.html')
+    for row in rows:
+        overlayGPX(BASE_PATH + row[0], myMap, row[2], row[1])
+
+    myMap.save('index.html')
+    webbrowser.open('index.html')
+
+if __name__ == "__main__":
+    # If the database doesn't exist, create it
+    DATABASE = 'database.db'
+
+    if not os.path.exists(DATABASE):
+        createDatabase()
+
+    startupMap()
