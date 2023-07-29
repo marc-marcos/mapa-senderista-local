@@ -1,25 +1,38 @@
 import os
 import sqlite3
 
-DATABASE = 'database.db'
+def modifyLink(route, link):
+    DATABASE = 'database.db'
 
-conn = sqlite3.connect(DATABASE)
-c = conn.cursor()
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
 
-c.execute('SELECT * FROM routes')
-rows = c.fetchall()
+    c.execute('UPDATE routes SET link=? WHERE route_path=?', (link, route))
 
-print(f"Status  Name\n")
-for row in rows:
-    print(f"{row[2]}       {row[0]}")
+    c.close()
+    conn.commit()
+    conn.close()
 
-option = "a"
+if __name__ == "__main__":
+    DATABASE = 'database.db'
 
-while option != "exit":
-    option = input("\nWhich route would you like to modify? (Enter the name of the route)\n")
-    link = input("What is the link of the route?\n")
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
 
-    c.execute('UPDATE routes SET link=? WHERE route_path=?', (link, option))
+    c.execute('SELECT * FROM routes')
+    rows = c.fetchall()
 
-conn.commit()
-conn.close()
+    print(f"Status  Name\n")
+    for row in rows:
+        print(f"{row[2]}       {row[0]}")
+
+    option = "a"
+
+    while option != "exit":
+        option = input("\nWhich route would you like to modify? (Enter the name of the route)\n")
+        link = input("What is the link of the route?\n")
+
+        modifyLink(option, link)
+
+    conn.commit()
+    conn.close()
