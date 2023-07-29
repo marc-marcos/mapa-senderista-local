@@ -13,8 +13,6 @@ def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
     customShortText = gpx.tracks[0].name
     distance = gpx.length_3d()
     totalElevation = gpx.get_uphill_downhill()
-    customText = "<b>Distance:</b> " + str(round(distance/1000, 2)) + " km" + "<br>" + "<b>Elevation:</b> " + str(round(totalElevation[0], 2)) + " m"
-
 
 
     for track in gpx.tracks:
@@ -34,6 +32,9 @@ def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
     else: 
         folium.PolyLine(points, color="blue", weight=2.5, opacity=1).add_to(map)
         statusColor = "blue"
+    
+    customText = f"<b>Distance:</b> {round(distance/1000, 2)} km\n<b>Elevation:</b> {round(totalElevation[0])} m"
+    
 
     folium.Marker(
         [gpx.tracks[0].segments[0].points[0].latitude, 
