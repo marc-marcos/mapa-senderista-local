@@ -3,3 +3,5 @@ database.db
 index.html
 databaseBackup.db
 database.db.bak
+__pycache__/
+```
