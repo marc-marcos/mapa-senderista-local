@@ -28,3 +28,6 @@ def regenerateRoutes():
     cursor.close()
     conn.commit()
     conn.close()
+
+if __name__ == '__main__':
+    regenerateRoutes()
