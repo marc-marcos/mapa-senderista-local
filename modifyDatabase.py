@@ -1,7 +1,7 @@
 import os
 import sqlite3
 
-def modify_database(route, status):
+def modifyDatabase(route, status):
     DATABASE = 'database.db'
 
     conn = sqlite3.connect(DATABASE)
@@ -31,7 +31,7 @@ if __name__ == "__main__":
         option = input("\nWhich route would you like to modify? (Enter the name of the route)\n")
         new_status = input("What would you like to change the status to? (0 = red, 1 = purple, 2 = green)\n")
 
-        modify_database(option, new_status)
+        modifyDatabase(option, new_status)
 
     conn.commit()
     conn.close()
