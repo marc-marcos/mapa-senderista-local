@@ -18,7 +18,6 @@ def regenerateRoutes():
 
     for path in os.listdir(dir_path):
         if path.endswith('.gpx'):
-            print(path)
             name = str(path).split('.')[0]
 
             # If a route with the same path already exists, skip this one
