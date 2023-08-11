@@ -1,4 +1,4 @@
-# Mapa Senderista Local 
+# Mapa Senderista Local (0.1)
 
 This projects aims to be a repository that you can store locally that can help you visualize your hiking projects or the routes that you want to check out.
 
