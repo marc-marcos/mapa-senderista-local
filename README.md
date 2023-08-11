@@ -17,17 +17,12 @@ The most interesting thing about this project is that it lets you visualize all 
 ### Installing
 
 * `git clone https://github.com/marc-marcos/mapa-senderista-local` 
-* `pip install -r requirements.txt`
-* Create a folder `routes/` and place all the .gpx files you want inside of it.
+* Execute installing script: `./install.sh`
 * `python3 createDatabase.py`
 
 ### Executing program
 
-* How to run the program
-* Everytime you modify the gpx file structure you need to run the following command. 
-* `python3 regenerateRoutes.py`
-* To run the program: `python3 index.py`
-* To modify the status of any route: `python3 modifyDatabase.py`
+* To start the gui: `python3 index.py` 
 
 ## Help
 
@@ -50,13 +45,12 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 ## Roadmap
 
 - 0.1 Version (next release)
-    - [ ] More options to modify the database. 
-    - [ ] Link of the route in the popup.
+    - [X] GUI to avoid having to deal with terminal usage.
+    - [X] Installation via script.
 - Future versions
-    - [ ] GUI to avoid having to deal with terminal usage.
-    - [ ] Installation via GUI.
-    - [ ] Not having to run `regenerateDatabase.py`. Running it only when necessary automatically.
+    - [ ] More options to modify the database. 
     - [ ] Being able to add points arbitrarily besides adding gpx routes.
+    - [ ] Link of the route in the popup.
 
 ## Acknowledgments
 
