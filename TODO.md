@@ -4,4 +4,3 @@
 - Hacer automáticamente una copia de seguridad del folder routes/ en la nube (github,gitlab,bitbucket...)
 - Usar el folder de notes para poder tener notas personalizadas de cada ruta y poder renderizarlas como html desde un botón del propio mapa (no sé si se puede)
 - Acabar la interfaz de usuario y que quede medianamente decente (quizá habría que usar tkinter en lugar de qt)
-- 

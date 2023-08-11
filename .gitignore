@@ -1,8 +1,7 @@
 routes/
 __pycache__/
+.vscode/
 backup/
 database.db
 index.html
-databaseBackup.db
-database.db.bak
 TODO.md

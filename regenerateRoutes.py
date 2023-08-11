@@ -3,6 +3,7 @@ import gpxpy
 import gpxpy.gpx
 import os
 
+
 def regenerateRoutes():
     DATABASE = 'database.db'
 
@@ -22,11 +23,13 @@ def regenerateRoutes():
 
             # If a route with the same path already exists, skip this one
             if cursor.execute('SELECT * FROM routes WHERE route_path=?', (str(path),)).fetchone() is None:
-                cursor.execute('INSERT INTO routes (route_path, route_name, status) VALUES (?, ?, ?)', (str(path), name, 0))
+                cursor.execute(
+                    'INSERT INTO routes (route_path, route_name, status) VALUES (?, ?, ?)', (str(path), name, 0))
 
     cursor.close()
     conn.commit()
     conn.close()
+
 
 if __name__ == '__main__':
     regenerateRoutes()

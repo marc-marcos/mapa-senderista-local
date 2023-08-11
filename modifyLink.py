@@ -1,6 +1,7 @@
 import os
 import sqlite3
 
+
 def modifyLink(route, link):
     DATABASE = 'database.db'
 
@@ -12,6 +13,7 @@ def modifyLink(route, link):
     c.close()
     conn.commit()
     conn.close()
+
 
 if __name__ == "__main__":
     DATABASE = 'database.db'
@@ -29,7 +31,8 @@ if __name__ == "__main__":
     option = "a"
 
     while option != "exit":
-        option = input("\nWhich route would you like to modify? (Enter the name of the route)\n")
+        option = input(
+            "\nWhich route would you like to modify? (Enter the name of the route)\n")
         link = input("What is the link of the route?\n")
 
         modifyLink(option, link)

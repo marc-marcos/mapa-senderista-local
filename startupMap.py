@@ -3,10 +3,11 @@ import folium
 import webbrowser
 import gpxpy
 
+
 def startupMap():
     BASE_PATH = 'routes/'
 
-    myMap = folium.Map(location=[10,10],zoom_start=3)
+    myMap = folium.Map(location=[10, 10], zoom_start=3)
 
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
@@ -20,7 +21,8 @@ def startupMap():
     myMap.save('index.html')
     webbrowser.open('index.html')
 
-def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
+
+def overlayGPX(gpxData, map, status, customText=None, customShortText=None):
     gpx_file = open(gpxData, 'r')
     gpx = gpxpy.parse(gpx_file)
     points = []
@@ -29,31 +31,32 @@ def overlayGPX(gpxData, map, status, customText = None, customShortText = None):
     distance = gpx.length_3d()
     totalElevation = gpx.get_uphill_downhill()
 
-
     for track in gpx.tracks:
-        for segment in track.segments:        
+        for segment in track.segments:
             for point in segment.points:
                 points.append(tuple([point.latitude, point.longitude]))
 
-    if status == 0: 
+    if status == 0:
         folium.PolyLine(points, color="red", weight=2.5, opacity=1).add_to(map)
         statusColor = "red"
-    elif status == 1: 
-        folium.PolyLine(points, color="purple", weight=2.5, opacity=1).add_to(map)
+    elif status == 1:
+        folium.PolyLine(points, color="purple",
+                        weight=2.5, opacity=1).add_to(map)
         statusColor = "purple"
-    elif status == 2: 
-        folium.PolyLine(points, color="green", weight=2.5, opacity=1).add_to(map)
+    elif status == 2:
+        folium.PolyLine(points, color="green",
+                        weight=2.5, opacity=1).add_to(map)
         statusColor = "green"
-    else: 
-        folium.PolyLine(points, color="blue", weight=2.5, opacity=1).add_to(map)
+    else:
+        folium.PolyLine(points, color="blue", weight=2.5,
+                        opacity=1).add_to(map)
         statusColor = "blue"
-    
+
     customText = f"<b>Distance:</b> {round(distance/1000, 2)} km\n<b>Elevation:</b> {round(totalElevation[0])} m"
-    
 
     folium.Marker(
-        [gpx.tracks[0].segments[0].points[0].latitude, 
-        gpx.tracks[0].segments[0].points[0].longitude], 
+        [gpx.tracks[0].segments[0].points[0].latitude,
+         gpx.tracks[0].segments[0].points[0].longitude],
         popup=customText,
         icon=folium.Icon(color=statusColor),
         tooltip=customShortText).add_to(map)
