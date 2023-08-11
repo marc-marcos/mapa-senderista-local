@@ -1,7 +1,7 @@
 import os
 
-from creatingDatabase import createDatabase 
-from gui import gui
+from src.creatingDatabase import createDatabase 
+from src.gui import gui
 
 if __name__ == "__main__":
     # If the database doesn't exist, create it
