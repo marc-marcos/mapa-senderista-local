@@ -1,6 +1,7 @@
 import os
 import sqlite3
 
+
 def createDatabase():
     DATABASE = 'database.db'
 
@@ -13,6 +14,7 @@ def createDatabase():
         c.close()
         conn.commit()
         conn.close()
+
 
 if __name__ == "__main__":
     createDatabase()
