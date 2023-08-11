@@ -1,13 +1,11 @@
-import os
 import sys
+import shutil
 
-def restoreDatabase():
-    os.system("cp database.db.bak database.db")
-    print("Database restored.")
+def restoreDatabase(path):
+    shutil.copy2(path, "database.db")
 
-def backupDatabase():
-    os.system("cp database.db database.db.bak")
-    print("Database backed up.")
+def backupDatabase(path):
+    shutil.copy2("database.db", path)
     
 if __name__ == "__main__":
     if len(sys.argv) < 2:
