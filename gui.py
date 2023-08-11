@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import filedialog as fd
 import webbrowser
 
+from backup_and_restore_gui import backup_and_restore_gui
 from startupMap import startupMap
 from regenerateRoutes import regenerateRoutes
 from backupDatabase import backupDatabase, restoreDatabase
@@ -21,11 +22,8 @@ def gui():
     btn2 = Button(window, text="Regenerate Routes", command=regenerateRoutes)
     btn2.pack()
 
-    btn4 = Button(window, text="Backup Database", command=backupDatabase)
+    btn4 = Button(window, text="Backup/Restore Database", command=backup_and_restore_gui)
     btn4.pack()
-
-    btn5 = Button(window, text="Restore Database", command=restoreDatabase)
-    btn5.pack()
 
     btn7 = Button(window, text="Modify Status", command=gui_modifyStatus)
     btn7.pack()
