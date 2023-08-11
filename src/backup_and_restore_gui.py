@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import filedialog as fd
 
-from backupDatabase import backupDatabase, restoreDatabase
-from generate_path_backup import generate_path_backup
+from src.backupDatabase import backupDatabase, restoreDatabase
+from src.generate_path_backup import generate_path_backup
 
 
 def backup_and_restore_gui():

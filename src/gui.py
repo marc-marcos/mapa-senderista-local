@@ -2,10 +2,10 @@ from tkinter import Tk, Button, Text
 from tkinter import filedialog as fd
 import webbrowser
 
-from backup_and_restore_gui import backup_and_restore_gui
-from startupMap import startupMap
-from regenerateRoutes import regenerateRoutes
-from modifyDatabase import modifyDatabase
+from src.backup_and_restore_gui import backup_and_restore_gui
+from src.startupMap import startupMap
+from src.regenerateRoutes import regenerateRoutes
+from src.modifyDatabase import modifyDatabase
 
 
 def gui():
