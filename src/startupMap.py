@@ -6,6 +6,7 @@ import gpxpy
 
 def startupMap():
     BASE_PATH = 'routes/'
+    BASE_PATH_CACHE = 'caches/'
 
     myMap = folium.Map(location=[10, 10], zoom_start=3)
 
@@ -17,9 +18,34 @@ def startupMap():
 
     for row in rows:
         overlayGPX(BASE_PATH + row[0], myMap, row[2], row[1])
+    
+    c.execute('SELECT * FROM caches')
+    rows2 = c.fetchall()
+
+    for row in rows2:
+        overlayGPX_cache(BASE_PATH_CACHE + row[0], myMap, row[2], row[1])
 
     myMap.save('index.html')
     webbrowser.open('index.html')
+
+def overlayGPX_cache(gpxData, map, status, customText=None):
+    gpx_file = open(gpxData, 'r')
+    gpx = gpxpy.parse(gpx_file)
+
+    lon = gpx.waypoints[0].longitude
+    lat = gpx.waypoints[0].latitude
+
+    if status == 1:
+        folium.Marker((lat, lon), tooltip=customText, color="red", icon=folium.Folium(color="red")).add_top(map)
+
+    elif status == 2:
+        folium.Marker((lat, lon), tooltip=customText, color="red", icon=folium.Icon(color="purple")).add_to(map)
+
+    elif status == 3:
+        folium.Marker((lat, lon), tooltip=customText, color="red", icon=folium.Icon(color="green")).add_to(map)
+
+    else:
+        folium.Marker((lat, lon), tooltip=customText, color="red", icon=folium.Icon(color="blue")).add_to(map)
 
 
 def overlayGPX(gpxData, map, status, customText=None, customShortText=None):

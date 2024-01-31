@@ -11,6 +11,8 @@ def createDatabase():
 
         c.execute('CREATE TABLE routes (route_path VARCHAR(255), route_name VARCHAR(100), status INT NOT NULL, link VARCHAR(255), PRIMARY KEY (route_path))')
 
+        c.execute('CREATE TABLE caches (cache_path VARCHAR(255), cache_name VARCHAR(100), status INT NOT NULL, PRIMARY KEY (cache_path))')
+
         c.close()
         conn.commit()
         conn.close()
